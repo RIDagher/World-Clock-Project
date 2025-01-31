@@ -1,29 +1,6 @@
-// const offices = {
-//   houston: -360,
-//   london: 0,
-//   newyork: -300,
-//   seatle: -480,
-//   sydney: 660,
-//   tokyo: 540,
-//   montreal: -300,
-// };
+'use strict';
 
-// function worldClock() {
-//   let currentDate = new Date();
-//   console.log('this is the current date ', currentDate);
-
-//   for (let office in offices) {
-//     let offset = offices[office] * 60000; // convert minutes to milliseconds
-//     let localTime = new Date(currentDate.getTime() + offset);
-//     // console.log(`${office} local time: `, localTime.toLocaleTimeString());
-
-//     document.querySelector(`#${office} span`).textContent =
-//       localTime.toLocaleTimeString();
-//   }
-// }
-
-// setInterval(worldClock, 1000);
-// worldClock();
+window.addEventListener('load', worldClock);
 
 const timeZones = {
   houston: 'America/Chicago',
@@ -32,14 +9,15 @@ const timeZones = {
   seattle: 'America/Los_Angeles',
   sydney: 'Australia/Sydney',
   tokyo: 'Asia/Tokyo',
-  montreal: 'America/Montreal',
+  montreal: 'America/Toronto',
+  beirut: 'Asia/Beirut',
 };
 
 function worldClock() {
   let currentDate = new Date();
 
   for (let office in timeZones) {
-    let localTime = currentDate.toLocaleTimeString('en-Us', {
+    let localTime = currentDate.toLocaleTimeString('en-US', {
       timeZone: timeZones[office],
       hour: '2-digit',
       minute: '2-digit',
@@ -48,6 +26,10 @@ function worldClock() {
     });
 
     document.querySelector(`#${office} span`).textContent = localTime;
+    let carouselTime = document.querySelector(`#${office}-time`);
+    if (carouselTime) {
+      carouselTime.textContent = localTime;
+    }
   }
 }
 
